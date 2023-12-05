@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
-const colorList = [Colors.orange, Colors.yellow, Colors.black, Colors.white];
+const colorList = [
+  Color(0xFFDB6B21),
+  Color(0xFFFFD700),
+  Colors.black,
+  Colors.white,
+  Color(0xFF24252A)
+];
 
 class AppTheme {
   final int selectedColor;
