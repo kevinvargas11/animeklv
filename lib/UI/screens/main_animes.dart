@@ -23,18 +23,21 @@ class MainAnime extends StatelessWidget {
             );
           }
 
-          final Animes? getPopulares = snapshot.data;
+          final Animes getPopulares = snapshot.data!;
 
           return ListView.builder(
-            itemCount: getPopulares?.results.length ?? 0,
+            scrollDirection: Axis.horizontal, // Añade esta línea
+            itemCount: getPopulares.results.length,
             itemBuilder: (context, index) {
               return Container(
-                child: Column(
+                margin:
+                    EdgeInsets.all(8.0), // Añade márgenes según tus necesidades
+                child: Row(
                   children: [
                     Image.network(
-                      getPopulares!.results[index].coverImage.medium,
+                      getPopulares.results[index].coverImage.medium,
                     ),
-                    // Add other widgets or details you want to display
+                    // Otros widgets o detalles que desees mostrar
                   ],
                 ),
               );
