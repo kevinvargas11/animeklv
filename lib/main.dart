@@ -1,4 +1,4 @@
-import 'package:animeklv/config/theme/theme.dart';
+import 'package:animeklv/UI/home/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,14 +10,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme(selectedColor: 0).getTheme(),
-      home: Scaffold(
-        body: Center(
-          child: FilledButton(onPressed: () {}, child: Text("Hola")),
-        ),
-      ),
-    );
+    return Home();
   }
 }
