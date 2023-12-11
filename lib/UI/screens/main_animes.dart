@@ -1,3 +1,4 @@
+import 'package:animeklv/Data/models/modelsanime.dart';
 import 'package:animeklv/Domain/peticiones/peticionesd.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,7 @@ class MainAnime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder(
+        body: FutureBuilder<Animes?>(
       future: Gets().getPopulares,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -15,9 +16,14 @@ class MainAnime extends StatelessWidget {
             child: (CircularProgressIndicator.adaptive()),
           );
         }
-        return ListView.builder(itemBuilder: (context, index) {
-          return ListTile();
-        });
+        final Animes? getPopulares = snapshot.data;
+        return ListView.builder(
+            itemCount: getPopulares?.results.length ?? 0,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(getPopulares!.results[index].title.userPreferred),
+              );
+            });
       },
     ));
   }

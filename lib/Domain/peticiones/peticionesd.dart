@@ -1,4 +1,5 @@
 import 'package:animeklv/Data/models/modelsanime.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class Gets {
@@ -9,7 +10,7 @@ class Gets {
 
     if (response.statusCode == 200) {
       print(response.body);
-      return animesFromJson(response.body);
+      return compute(animesFromJson, response.body);
     }
   }
 }
