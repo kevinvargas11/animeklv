@@ -35,7 +35,7 @@ class Result {
   final String status;
   final Title title;
   final List<String> genres;
-  final String description;
+  String description; // Cambiado a String
   final String bannerImage;
   final CoverImage coverImage;
   final int? episodes;
@@ -60,7 +60,10 @@ class Result {
     required this.season,
     required this.seasonYear,
     required this.averageScore,
-  });
+  }) {
+    // Limpia la descripción
+    description = description.replaceAll(RegExp(r'\\n|<br>'), '');
+  }
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
         id: json["id"],

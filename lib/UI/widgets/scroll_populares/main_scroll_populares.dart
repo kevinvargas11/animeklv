@@ -1,5 +1,6 @@
 import 'package:animeklv/Data/models/modelsanime.dart';
 import 'package:animeklv/Domain/peticiones/peticionesd.dart';
+import 'package:animeklv/UI/screens/Episodios/lista_de_episodios.dart';
 import 'package:flutter/material.dart';
 
 class MainScrollPopulares extends StatelessWidget {
@@ -39,7 +40,11 @@ class MainScrollPopulares extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        print(getPopulares.results[index].title.userPreferred);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainEpisodios(
+                                    animeata: getPopulares.results[index])));
                       },
                       child: Stack(
                         children: [
