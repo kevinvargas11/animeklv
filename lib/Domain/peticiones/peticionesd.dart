@@ -9,7 +9,6 @@ class Gets {
     final response = await http.get(Uri.parse("$baseUrl/popular"));
 
     if (response.statusCode == 200) {
-      print(response.body);
       return compute(animesFromJson, response.body);
     } else {
       // Manejar el error lanzando una excepción
