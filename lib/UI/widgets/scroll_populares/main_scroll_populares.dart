@@ -44,7 +44,7 @@ class MainScrollPopulares extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => MainEpisodios(
-                                    animeata: getPopulares.results[index])));
+                                    animeData: getPopulares.results[index])));
                       },
                       child: Stack(
                         children: [
