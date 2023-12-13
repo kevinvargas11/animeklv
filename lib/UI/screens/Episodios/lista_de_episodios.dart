@@ -1,6 +1,8 @@
 import 'package:animeklv/Data/models/models_anime_list.dart';
 import 'package:animeklv/Data/models/modelsanime.dart';
 import 'package:animeklv/Domain/peticiones/peticionesd.dart';
+import 'package:animeklv/UI/screens/videos/videos.dart';
+
 import 'package:flutter/material.dart';
 
 class MainEpisodios extends StatelessWidget {
@@ -22,28 +24,50 @@ class MainEpisodios extends StatelessWidget {
               future: Gets().getListaEpisodios(animeData.id.toString()),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator.adaptive();
+                  return const CircularProgressIndicator.adaptive();
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else if (!snapshot.hasData ||
                     snapshot.data!.episodes.isEmpty) {
-                  return Text('No hay episodios disponibles.');
+                  return const Text('No hay episodios disponibles.');
                 } else {
+                  final ListaEpisodios getLista = snapshot.data!;
                   return Expanded(
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
                           Text(
-                              'Número de episodios: ${snapshot.data!.episodes.length}'),
-                          SizedBox(height: 10),
+                              'Número de episodios: ${getLista.episodes.length}'),
+                          const SizedBox(height: 10),
                           ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: snapshot.data!.episodes.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: getLista.episodes.length,
                             itemBuilder: (context, index) {
-                              return ListTile(
-                                title:
-                                    Text(snapshot.data!.episodes[index].title),
+                              return GestureDetector(
+                                onTap: () {
+                                  print("tocaste el epidosio");
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ScreenVideos(
+                                                episodeData:
+                                                    getLista.episodes[index],
+                                              )));
+                                },
+                                child: Container(
+                                  width: double.maxFinite,
+                                  margin: const EdgeInsets.all(6.0),
+                                  padding: const EdgeInsets.all(4.0),
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.black),
+                                      borderRadius: BorderRadius.circular(8.0)),
+                                  child: ListTile(
+                                    title: Text(
+                                        "${animeData.title.userPreferred} - ${getLista.episodes[index].title}"),
+                                  ),
+                                ),
                               );
                             },
                           ),
