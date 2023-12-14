@@ -38,6 +38,8 @@ class Gets {
   Future<VideoAnime> getVideoAnime(String episodioId) async {
     final urlVideoEpisodios = "$baseUrl/stream/$episodioId";
 
+    print('URL de la solicitud HTTP: $urlVideoEpisodios');
+
     final response = await http.get(Uri.parse(urlVideoEpisodios));
 
     if (response.statusCode == 200) {
